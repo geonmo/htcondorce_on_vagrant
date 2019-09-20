@@ -1,0 +1,20 @@
+- name: install epel
+  hosts: all
+  roles:
+    - role: geerlingguy.repo-epel
+
+- name: Install UMD
+  hosts: all
+  roles:
+    - role: egi-foundation.umd
+      ca_verification: true
+      release: 4
+- name: Install htcondor-ce package
+  hosts: condor-ce
+  roles:
+    - role: hephyvienna.htcondor_ce
+      htcondor_ce_batch_system: condor
+      htcondor_ce_argus_server: node3.intranet.local
+        
+
+
