@@ -44,7 +44,7 @@
     - role: hephyvienna.poolaccounts
 
 - name: Install htcondor-ce package
-  hosts: condor-ce
+  hosts: condor_ce
     - role: hephyvienna.htcondor_ce
       htcondor_ce_batch_system: condor
       htcondor_ce_argus_server: node3.intranet.local
