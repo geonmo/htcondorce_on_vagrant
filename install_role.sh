@@ -6,7 +6,7 @@ ansible-galaxy -c install geerlingguy.repo-epel
 ansible-galaxy -c install hephyvienna.htcondor_ce
 ansible-galaxy -c install hephyvienna.htcondor_grid
 ansible-galaxy -c install hephyvienna.htcondor_poolaccounts
-
+ansible-galaxy -c install hephyvienna.workernode
 
 
 wget --no-check-certificate http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor

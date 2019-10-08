@@ -56,3 +56,18 @@
       htcondor_ce_argus_server: node3.intranet.local
       htcondor_ce_uid_domain: "{{ ansible_domain }}"
 
+
+- name: Setup local condor(LRMS) collector
+  hosts: lrms
+  vars:
+    grid_vos:
+      - cms
+    grid_umd_repo_exclude:
+      - dpm-*
+      - lfc-*
+      - lcgdm-*
+  roles:
+    - role: hephyvienna.grid
+    - role: hephyvienna.workernode
+      workernode_ui: true
+      worknode_install_htc_ce_client: true
