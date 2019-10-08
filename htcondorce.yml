@@ -6,7 +6,6 @@
 - name: grid and pool account setting
   hosts: all
   vars:
-  vars:
     poolaccounts:
       - name: 'cms%03d'
         uid: 10000
@@ -45,6 +44,13 @@
 
 - name: Install htcondor-ce package
   hosts: condor_ce
+  vars:
+    grid_vos:
+      - cms
+    grid_site_name:
+      - "demo_site"
+  roles:
+    - role: hephyvienna.grid
     - role: hephyvienna.htcondor_ce
       htcondor_ce_batch_system: condor
       htcondor_ce_argus_server: node3.intranet.local
