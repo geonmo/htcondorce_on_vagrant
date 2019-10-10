@@ -1,0 +1,42 @@
+- name: Setup local condor(LRMS) collector
+  hosts: lrms
+  vars:
+    grid_vos:
+      - cms
+    grid_umd_repo_exclude:
+      - dpm-*
+      - lfc-*
+      - lcgdm-*
+  roles:
+    - role: hephyvienna.grid
+    - role: hephyvienna.workernode
+      workernode_ui: true
+      worknode_install_htc_ce_client: true
+    - role: geonmo.ansible_htcondor
+      condor_admin: "admin@node0.intranet.local"
+      condor_daemon_list: "MASTER, COLLECTOR, NEGOTIATOR"
+      condor_domain: "intranet.local"
+      condor_host: "node1.intranet.local"
+      condor_name: "HTCondor Cluster"
+
+- name: Setup local condor WN
+  hosts: condor_wn
+  vars:
+    grid_vos:
+      - cms
+    grid_umd_repo_exclude:
+      - dpm-*
+      - lfc-*
+      - lcgdm-*
+  roles:
+    - role: hephyvienna.grid
+    - role: hephyvienna.workernode
+      workernode_ui: false
+      worknode_install_htc_ce_client: false
+    - role: geonmo.ansible_htcondor
+      condor_admin: "admin@node0.intranet.local"
+      condor_daemon_list: "MASTER, STARTD"
+      condor_domain: "intranet.local"
+      condor_host: "node1.intranet.local"
+      condor_name: "HTCondor Cluster"
+      enable_dynamicslot: true

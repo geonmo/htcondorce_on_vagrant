@@ -1,0 +1,20 @@
+- name: Install htcondor-ce package
+  hosts: condor_ce
+  vars:
+    grid_vos:
+      - cms
+    grid_site_name:
+      - "demo_site"
+  roles:
+    - role: hephyvienna.grid
+    - role: hephyvienna.htcondor_ce
+      htcondor_ce_batch_system: condor
+      htcondor_ce_argus_server: node3.intranet.local
+      htcondor_ce_uid_domain: "{{ ansible_domain }}"
+    - role: geonmo.ansible_htcondor
+      condor_admin: "admin@node0.intranet.local"
+      condor_daemon_list: "MASTER, SCHEDD"
+      condor_domain: "intranet.local"
+      condor_host: "node1.intranet.local"
+      condor_name: "HTCondor Cluster"
+      enable_dynamicslot: true

@@ -1,0 +1,8 @@
+- name: Fix NIC to internal network
+  hosts: all
+  tasks:
+    - lineinfile: 
+        dest: /etc/condor/config.d/01-cluster.conf 
+        line: "NETWORK_INTERFACE = 10.0.3.2 " 
+        state: present
+      when: hostvars[item].ansible_default_ipv4.address is defined
