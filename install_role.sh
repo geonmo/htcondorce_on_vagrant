@@ -1,6 +1,6 @@
 #!/bin/bash
-sudo yum update
-sudo yum update ansible
+sudo yum update -y
+sudo yum update -y ansible
 
 ansible-galaxy -c install geerlingguy.repo-epel
 ansible-galaxy -c install hephyvienna.htcondor_ce
