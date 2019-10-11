@@ -20,3 +20,37 @@
       service: 
         name: condor
         state: restarted
+    - name: restart_condorce
+      service: 
+        name: condor-ce
+        state: restarted
+
+- name: Fix condorce configuration
+  hosts: condor_ce
+  vars:
+    ipinfo: 
+      - { name: "node0", ip: "192.168.10.3"}
+    LRMS: "node1.intranet.local"
+  tasks:
+    - copy: 
+        dest: /etc/condor-ce/config.d/03-private.conf 
+        content: "BIND_ALL_INTERFACES = FALSE\nNETWORK_INTERFACE = {{ item.ip }}\n" 
+      when: 
+        - "ansible_hostname == item.name"
+      with_items:
+        - "{{ ipinfo }}"
+      notify: restart_condorce
+    - lineinfile:
+        path: /etc/condor-ce/condor_mapfile
+        insertbefore: 'GSI (.*) GSS_ASSIST_GRIDMAP'
+        line: 'GSI "/C=KR/O=KISTI/O=GSDC/O=Dummy CA/CN=host/node0.intranet.local" node0.intranet.local'
+    - replace:
+        path: /etc/condor-ce/config.d/02-ce-condor.conf
+        regexp: 'JOB_ROUTER_SCHEDD2_POOL=(.*):9618'
+        replace: 'JOB_ROUTER_SCHEDD2_POOL={{ LRMS }}:9618'
+  handlers: 
+    - name: restart_condorce
+      service: 
+        name: condor-ce
+        state: restarted
+
