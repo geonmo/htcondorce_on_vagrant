@@ -1,0 +1,27 @@
+executable = test.sh
+universe   = vanilla
+arguments  = $(Process)
+log = condor.log
+
+getenv     = True
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+#output = job_$(Process).out
+#error = job_$(Process).err
+
+
+output = job_$(Hostname).out
+error = job_$(Hostname).err
+
+
+requirements = (Machine =?= "$(Hostname)")
+
+
+
+
+notification = Error
+notify_user = geonmo@kisti.re.kr
+
+queue 1 Hostname from ifarm.txt
+
