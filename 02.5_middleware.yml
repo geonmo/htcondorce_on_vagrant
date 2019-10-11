@@ -1,4 +1,4 @@
-- name: install epel repo, grid and pool account setting
+- name: install grid and pool account setting
   hosts: all
   vars:
     poolaccounts:
@@ -34,6 +34,5 @@
     grid_vos:
       - cms
   roles:
-    - role: geerlingguy.repo-epel
     - role: hephyvienna.grid
     - role: hephyvienna.poolaccounts
