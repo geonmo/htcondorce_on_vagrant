@@ -12,13 +12,13 @@ site_name = {{ grid_site_name }}
 # Batch system hostname.  This does not need to be a definitive hostname,
 # but it should uniquely identify the batch system.
 # Example: pbs.gridpp.rl.ac.uk
-lrms_server = {{ lrms_hostname }}
+lrms_server = {{ lrms_server }}
 
 [blah]
 enabled = true
-dir = /var/log/cream/accounting
+dir = /var/lib/condor/accounting
 # typical logfile name is blahp.log-yyyymmdd
-filename_prefix = blahp.log
+filename_prefix = blahp
 subdirs = false
 
 [batch]
@@ -34,9 +34,9 @@ type = HTCondor
 # Whether to try to parse multi-core details
 parallel = true
 # Directory to search for accounting logfiles
-dir =
+dir = /var/lib/condor/accounting
 # Prefix shared by all log files to parse
-filename_prefix =
+filename_prefix = batch
 # Whether to search subdirectories for logfiles
 subdirs = false
 
