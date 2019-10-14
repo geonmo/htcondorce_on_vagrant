@@ -1,16 +1,13 @@
-- name: Install apel packages from apel github
+- name: Install apel packages from apel github for apelparser
   vars_files: 
     - vars/main.yml
   hosts: condor_ce
   tasks:
     - yum: 
-        name: 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-lib-1.8.2-1.el7.noarch.rpm'
-        state: present
-    - yum: 
-        name: 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-parsers-1.8.2-1.el7.noarch.rpm'
-        state: present
-    - yum: 
-        name: 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-client-1.8.2-1.el7.noarch.rpm'
+        name: 
+          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-lib-1.8.2-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-parsers-1.8.2-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-client-1.8.2-1.el7.noarch.rpm'
         state: present
     - yum:
         name: htcondor-ce-apel
@@ -19,4 +16,32 @@
         src: templates/parser.cfg.j2
         dest: /etc/apel/parser.cfg
         
+
+- name: Install apel packages from apel github for apelclient
+  vars_files: 
+    - vars/main.yml
+  hosts: apelclient
+  tasks:
+    - yum:
+        name: 
+          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-lib-1.8.2-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-client-1.8.2-1.el7.noarch.rpm'
+          - 'mariadb'
+        state: present
+    - service:
+        name: mariadb
+        state: started
+    - service:
+        name: mariadb
+        state: enabled
+    - mysql_db:
+        name: apelclient
+        state: import
+        target: /usr/share/apel/client.sql
+    - mysql_user:
+        name: apelclient
+        host: localhost
+        state: present
+        password: "{{ apeldb_pw }}"
+        priv: "grant all on apelclient.* to 'apelclient'@'*.intranet.local" 
 
