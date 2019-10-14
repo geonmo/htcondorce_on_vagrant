@@ -13,15 +13,3 @@ ansible-galaxy -c install geonmo.ansible_htcondor
 wget --no-check-certificate http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor
 sudo rpm --import RPM-GPG-KEY-HTCondor
 
-openssl req -x509 -newkey rsa:4096 -keyout key_encrypt.pem -out cert.pem -days 365
-openssl rsa -in key_encrypt.pem -out key.pem
-
-
-sudo mkdir -p /etc/grid-security
-sudo cp cert.pem /etc/grid-security/hostcert.pem
-sudo cp key.pem /etc/grid-security/hostkey.pem
-sudo chmod 400 /etc/grid-security/hostkey.pem 
-sudo chmod 644 /etc/grid-security/hostcert.pem 
-sudo chown root.root /etc/grid-security/host*.pem
-
-
