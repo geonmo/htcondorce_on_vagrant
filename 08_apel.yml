@@ -1,0 +1,13 @@
+- name: Install apel packages from apel github
+  include_vars:
+    file: vars/main.yml
+    name: Grid configuration
+  hosts: condor_ce
+  tasks:
+    - yum: 
+        name: 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-lib-1.8.2-1.el7.noarch.rpm'
+        state: present
+    - yum: 
+        name: 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-parsers-1.8.2-1.el7.noarch.rpm'
+        state: present
+

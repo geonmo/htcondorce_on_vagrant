@@ -29,5 +29,5 @@
       enable_dynamicslot: true
   tasks:
     - template:
-        src: dummy.signing_policy.j2
+        src: templates/dummy.signing_policy.j2
         dest: "/etc/grid-security/certificates/{{ grid_dummy_ca.hash }}.signing_policy"
