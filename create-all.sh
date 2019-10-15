@@ -7,7 +7,6 @@
 
 set -e -o pipefail
 
-#/C=KR/O=KISTI/O=KISTI/CN=host/cms-t2-ce01.sdfarm.kr
 CAsubj="/C=KR/O=KISTI/O=GSDC/CN=Dummy CA"
 CApath="dummy/CA"
 ClientSubj="/C=KR/O=KISTI/O=GSDC/O=Dummy CA/CN=" # the CN value gets appended

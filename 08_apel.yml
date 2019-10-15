@@ -15,6 +15,12 @@
     - template:
         src: templates/parser.cfg.j2
         dest: /etc/apel/parser.cfg
+        mode: 0600
+    - copy:
+        src: files/accountingRun.sh
+        dest: /etc/cron.daily/accountingRun.cron
+ 
+         
         
 
 - name: Install apel packages from apel github for apelclient
@@ -26,22 +32,33 @@
         name: 
           - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-lib-1.8.2-1.el7.noarch.rpm'
           - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-client-1.8.2-1.el7.noarch.rpm'
-          - 'mariadb'
+          - 'mariadb-server'
         state: present
     - service:
         name: mariadb
         state: started
-    - service:
-        name: mariadb
-        state: enabled
+        enabled: true
     - mysql_db:
         name: apelclient
         state: import
         target: /usr/share/apel/client.sql
     - mysql_user:
-        name: apelclient
-        host: localhost
+        name: apel
+        host: "{{ item }}"
         state: present
         password: "{{ apeldb_pw }}"
-        priv: "grant all on apelclient.* to 'apelclient'@'*.intranet.local" 
+        priv: "apelclient.*:ALL,GRANT"
+      with_items:
+        - "localhost"
+        - "%"
+    - template:
+        src: templates/client.cfg.j2
+        dest: /etc/apel/client.cfg
+        mode: 0600
+    - template:
+        src: templates/sender.cfg.j2
+        dest: /etc/apel/sender.cfg
+    - copy:
+        src: files/accountingSend.sh
+        dest: /etc/cron.daily/accountingSend.cron
 

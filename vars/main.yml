@@ -11,6 +11,6 @@ grid_host_certificate: {}
 ca_info:
   cn: /C=KR/O=KISTI/O=GSDC/CN=Dummy CA
   target: /C=KR/O=KISTI/O=GSDC/*
-lrms_server: node0.intranet.local:9618/node0.intranet.local-condor 
+lrms_server: node0.intranet.local:9619/node0.intranet.local-condor 
 apelclient_hostname: node3.intranet.local
 apeldb_pw: SomeSecretPasswordNooneCanGuess

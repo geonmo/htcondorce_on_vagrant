@@ -13,3 +13,4 @@ ansible-galaxy -c install geonmo.ansible_htcondor
 wget --no-check-certificate http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor
 sudo rpm --import RPM-GPG-KEY-HTCondor
 
+./create-all.sh
