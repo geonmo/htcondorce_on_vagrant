@@ -13,4 +13,9 @@
       condor_domain: "intranet.local"
       condor_host: "node1.intranet.local"
       condor_name: "HTCondor Cluster"
-      enable_dynamicslot: true
+  tasks:
+    - template:
+        src: templates/99-ce-bdii.conf.j2
+        dest: /etc/condor/config.d/99-ce-bdii.conf
+        mode: "0644"
+        force: true
