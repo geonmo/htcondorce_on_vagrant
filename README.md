@@ -54,5 +54,8 @@ end
 The code is written to automatically recognize the test user's public key and to write node IP information to the /etc/hosts file. Therefore, it is safe to modify the code directly or do the installation part separately. Please, see the https://github.com/geonmo/desktop_vagrant.git for detail.
 
 ## Limitation
-The provided scripts do not fit into the production environment in many ways. Completion of this part, please modify it for individual sites.
+The provided scripts do not fit into the production environment in many ways. Completion of this part, please modify it for individual sites. Site administrators should consider the following settings.
 
+1. We used a host certificate with a dummy Trust CA for testing. The administrator who wants to provide the service must actually build the system using the host certificate that is allowed. (CERN or local Trust CA)
+1. This setting does not include the Security setting in the local HTCondor cluster managed by LRMS. The system administrator should refer to the HTCondor manual and change the settings to prevent security problems. To do this, you can test both the LRMS and HTCondor-CE services using the job submission specification file in the test directory.
+1. HTCondor-CE is installed so that condor_mapfile can use ARGUS during installation. However, for testing purposes, the condor_mapfile has been modified so that any GSI certificate request is approved. Site administrators should either modify the condor_mapfile to meet their site's goals or build a separate Argus system to supplement this.
