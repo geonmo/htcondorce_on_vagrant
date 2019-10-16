@@ -1,21 +1,8 @@
 - name: Install htcondor-ce package
   hosts: condor_ce
-  vars:
-    grid_vos:
-      - cms
-    grid_dummy_host_certificate: true
-    grid_site_name: "KR-DUMMY-Tier3"
-    grid_dummy_ca:
-      crt: dummy/CA.crt
-      key: dummy/CA.key
-      hash: 19d25ae9
-      cn: /C=KR/O=KISTI/O=GSDC/O=Dummy CA/CN=
-    grid_host_certificate: {}
-    ca_info:
-      cn: /C=KR/O=KISTI/O=GSDC/CN=Dummy CA
-      target: /C=KR/O=KISTI/O=GSDC/*
+  vars_files:
+    - vars/main.yml
   roles:
-    - role: hephyvienna.grid
     - role: hephyvienna.htcondor_ce
       htcondor_ce_batch_system: condor
       htcondor_ce_argus_server: node3.intranet.local

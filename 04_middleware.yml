@@ -1,38 +1,7 @@
 - name: install grid and pool account setting
   hosts: all
-  vars:
-    poolaccounts:
-      - name: 'cms%03d'
-        uid: 10000
-        number: 2
-        step: 2
-        description: 'Standard User of the CMS VO'
-        group: cms
-        gid: 10000
-      - name: 'cmsprd%02d'
-        uid: 11000
-        number: 2
-        step: 2
-        description: 'Production User of the CMS VO'
-        group: cmsprd
-        gid: 11000
-        groups: cms
-      - name: 'cmspil%02d'
-        uid: 12000
-        number: 2
-        step: 2
-        description: 'Pilot User of the CMS VO'
-        group: cmspil
-        gid: 12000
-        groups: cms
-      - name: 'cmssgm'
-        uid: 13000
-        description: 'SW User of the CMS VO'
-        group: cmssgm
-        gid: 13000
-        groups: cms
-    grid_vos:
-      - cms
+  vars_files:
+    - vars/main.yml
   roles:
     - role: hephyvienna.grid
     - role: hephyvienna.poolaccounts

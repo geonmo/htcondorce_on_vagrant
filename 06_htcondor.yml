@@ -1,14 +1,8 @@
 - name: Setup local condor(LRMS) collector
   hosts: lrms
-  vars:
-    grid_vos:
-      - cms
-    grid_umd_repo_exclude:
-      - dpm-*
-      - lfc-*
-      - lcgdm-*
+  vars_files:
+    - vars/main.yml
   roles:
-    - role: hephyvienna.grid
     - role: hephyvienna.workernode
       workernode_ui: true
       worknode_install_htc_ce_client: true
@@ -21,15 +15,9 @@
 
 - name: Setup local condor WN
   hosts: condor_wn
-  vars:
-    grid_vos:
-      - cms
-    grid_umd_repo_exclude:
-      - dpm-*
-      - lfc-*
-      - lcgdm-*
+  vars_files:
+    - vars/main.yml
   roles:
-    - role: hephyvienna.grid
     - role: hephyvienna.workernode
       workernode_ui: false
       worknode_install_htc_ce_client: false
