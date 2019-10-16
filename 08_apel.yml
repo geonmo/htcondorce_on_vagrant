@@ -19,6 +19,10 @@
     - copy:
         src: files/accountingRun.sh
         dest: /etc/cron.daily/accountingRun.cron
+    - lineinfile: 
+        path: /etc/condor-ce/config.d/50-ce-apel.conf 
+        line: "APEL_SCALING_ATTR = MachineAttrRalScaling0"
+
  
          
         

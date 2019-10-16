@@ -1,10 +1,20 @@
-- name: Build hosts file
-  hosts: all
+#- name: Build hosts file
+#  hosts: all
+#  tasks:
+#    - lineinfile: 
+#        dest: /etc/hosts 
+#        regexp: '.*{{ item }}$' 
+#        line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ hostvars[item].ansible_fqdn }} {{ item }}" 
+#        state: present
+#      when: hostvars[item].ansible_default_ipv4.address is defined
+#      with_items: "{{ groups['all'] }}"
+#
+- name: Remove 127.0.0.1 for private interface
+  hosts: node0
   tasks:
-    - lineinfile: 
-        dest: /etc/hosts 
-        regexp: '.*{{ item }}$' 
-        line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ hostvars[item].ansible_fqdn }} {{ item }}" 
-        state: present
-      when: hostvars[item].ansible_default_ipv4.address is defined
-      with_items: "{{ groups['all'] }}"
+    - replace:
+        path: hosts
+        regexp: '^127.0.0.1\s*node?.*'
+        replace: ''
+
+
