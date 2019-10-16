@@ -5,3 +5,7 @@
   roles:
     - role: hephyvienna.grid
     - role: hephyvienna.poolaccounts
+  tasks:
+    - template:
+        src: templates/dummy.signing_policy.j2
+        dest: "/etc/grid-security/certificates/{{ grid_dummy_ca.hash }}.signing_policy"
