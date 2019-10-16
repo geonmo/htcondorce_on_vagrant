@@ -60,3 +60,19 @@ The provided scripts do not fit into the production environment in many ways. Co
 1. This setting does not include the Security setting in the local HTCondor cluster managed by LRMS. The system administrator should refer to the HTCondor manual and change the settings to prevent security problems. To do this, you can test both the LRMS and HTCondor-CE services using the job submission specification file in the test directory.
 1. HTCondor-CE is installed so that condor_mapfile can use ARGUS during installation. However, for testing purposes, the condor_mapfile has been modified so that any GSI certificate request is approved. Site administrators should either modify the condor_mapfile to meet their site's goals or build a separate Argus system to supplement this.
 1. We modified the configuration of HTCondor due to network interface problem in Vagrant environment. The contents of the /etc/condor/conf.d/03-private.conf and /etc/condor-ce/conf.d/03-private.conf files to ensure that services work properly in HTCondor and HTCondor-CE in production. Please correct or delete it.
+
+## Description of each step file
+### 00_install_role.sh
+You can install the ansible roles and create dummy Trust CA.
+
+A total of 6 ansible roles are installed.
+
+The first role, *geerlingguy.repo-epel*, is an epel repo installation ansible role created by Jeff Geerling, who created the centos7 OS image. Many thanks for his help. On CentOS7, you can simply install epel-release via the yum command, but the meta option doesn't work so often that you need to modify your repo file. With Jeff Geerling's ansible code you can install an EPEL repo that works very well.
+
+The second to fifth roles were developed by the Institute of High Energy Physics, Austrian Academy of Sciences. All Roles help build UMD middleware system and install HTCondor-CE. Since the existing YAIM setup program does not work well, the Ansible Role is very helpful in UMD middleware. Many thanks to IHEP and Dietrich Liko for developing the code.
+
+The sixth is a role which moved HTCondor installation script used by KISTI to Ansible. The role is still missing a lot of features, but this HTCondor-CE demo is just fine.
+
+*create-all.sh* is a dummy Trust CA creation script developed by Mark Kubacki. By modifying the script, we could create a virtual dummy Trust CA for the demo and copy it to the /etc/grid-security/certificates directory. Thanks to W. Mark Kubacki for developing the code.
+
+
