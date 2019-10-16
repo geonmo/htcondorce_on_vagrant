@@ -52,3 +52,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 The code is written to automatically recognize the test user's public key and to write node IP information to the /etc/hosts file. Therefore, it is safe to modify the code directly or do the installation part separately. Please, see the https://github.com/geonmo/desktop_vagrant.git for detail.
+
+## Limitation
+The provided scripts do not fit into the production environment in many ways. Completion of this part, please modify it for individual sites.
+
