@@ -10,10 +10,10 @@
 #      with_items: "{{ groups['all'] }}"
 #
 - name: Remove 127.0.0.1 for private interface
-  hosts: node0
+  hosts: all
   tasks:
     - replace:
-        path: hosts
+        path: /etc/hosts
         regexp: '^127.0.0.1\s*node?.*'
         replace: ''
 
