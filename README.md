@@ -67,12 +67,50 @@ You can install the ansible roles and create dummy Trust CA.
 
 A total of 6 ansible roles are installed.
 
-The first role, *geerlingguy.repo-epel*, is an epel repo installation ansible role created by Jeff Geerling, who created the centos7 OS image. Many thanks for his help. On CentOS7, you can simply install epel-release via the yum command, but the meta option doesn't work so often that you need to modify your repo file. With Jeff Geerling's ansible code you can install an EPEL repo that works very well.
+The first role, *geerlingguy.repo-epel*, is an epel repo installation ansible role created by **Jeff Geerling**, who created the centos7 OS image. Many thanks for his help. With Jeff Geerling's ansible code you can install an EPEL repo that works very well.
 
-The second to fifth roles were developed by the Institute of High Energy Physics, Austrian Academy of Sciences. All Roles help build UMD middleware system and install HTCondor-CE. Since the existing YAIM setup program does not work well, the Ansible Role is very helpful in UMD middleware. Many thanks to IHEP and Dietrich Liko for developing the code.
+The second to fifth roles were developed by **the Institute of High Energy Physics, Austrian Academy of Sciences**. All Roles help build UMD middleware system and install HTCondor-CE. Since the existing YAIM setup program does not work well, the Ansible Role is very helpful in UMD middleware. Many thanks to IHEP and **Dietrich Liko** for developing the code.
 
-The sixth is a role which moved HTCondor installation script used by KISTI to Ansible. The role is still missing a lot of features, but this HTCondor-CE demo is just fine.
+The sixth is a role which moved HTCondor installation script used by **KISTI** to Ansible. The role is still missing a lot of features, but this HTCondor-CE demo is just fine.
 
 *create-all.sh* is a dummy Trust CA creation script developed by Mark Kubacki. By modifying the script, we could create a virtual dummy Trust CA for the demo and copy it to the /etc/grid-security/certificates directory. Thanks to W. Mark Kubacki for developing the code.
 
+
+### 01_hosts.yml
+Plese, type "ansible-playbook 01_hosts.yml" to run it.
+
+When you add a Private Network Interface in Vagrant, the content is added to the /etc/hosts file which is included as its hostname maps to 127.0.0.1. This causes problems with the operation of the HTCondor and HTCondor-CE services. Therefore, it must be remove from /etc/hosts. However, in most cases, this setting is not necessary. Because the first NIC takes over the public IP and communicates with the working nodes through the NIC. However, due to immature use of Vagrant, we need to add NIC as the second interface to fix IP addresses.
+
+
+### 02_epel.yml
+Plese, type "ansible-playbook 02_epel.yml" to run it.
+
+On CentOS7, you can simply install epel-release via the yum command, but the _meta_ option doesn't work so often that you need to modify your repo file. **Jeff Geerling**'s epel repo ansible code solve the problem.
+
+### 03_updateAnsible.sh
+Plese, type "./03_updateAnsible.sh" to run it.
+
+Below ansible codes require Ansible v2.8. So, we need to install latest ansible from EPEL repo.
+
+### 04_middleware.yml
+Plese, type "ansible-playbook 04_middleware.yml" to run it.
+
+It performs the tasks to setup UMD middleware on all nodes, adding certificates, adding user accounts and creating home directories, and installing host certificates. Please refer to the roles(grid, poolaccount) developed by IHEP for more details.
+In this example, the following settings are used.
+
+```ruby
+grid_vos:
+   -cms
+grid_dummy_host_certificate: true
+grid_site_name: "KR-DUMMY-Tier3"
+grid_dummy_ca:
+   crt: dummy/CA.crt
+   key: dummy/CA.key
+   hash: 19d25ae9
+   cn: /C=KR/O=KISTI/O=GSDC/O=Dummy CA/CN=
+grid_host_certificate: {}
+```
+In this case, dummy host certificate is configured to be used, but in practice, vars should be changed to install a public certificate.
+
+If you want to test by changing the certificate information of the dummy host certificate, you must also change the hash value. I didn't know how to calculate the hash value, so I got the hash value from htcondor-ce's MasterLog message and entered it.
 
