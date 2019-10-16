@@ -3,6 +3,7 @@ These codes are written based on the code to explain how to install HTCondor-CE 
 
 You can run the code sequentially to see how HTCondor-CE is working and what packages you need.
 
+## System environment
 This lab requires at least 4 cores of CPU and 4 GB of RAM or higher. If you can test with equipment below this, but there is no guarantee that it will work properly.
 
 The Vagrantfiles used are shown below. 
@@ -42,4 +43,4 @@ Vagrant.configure("2") do |config|
   end  
 end
 ```
-The code is written to automatically recognize the test user's public key and to write node information to the / etc / hosts file. Therefore, it is safe to modify the code directly or do the installation part separately.
+The code is written to automatically recognize the test user's public key and to write node IP information to the /etc/hosts file. Therefore, it is safe to modify the code directly or do the installation part separately. Please, see the https://github.com/geonmo/desktop_vagrant.git for detail.
