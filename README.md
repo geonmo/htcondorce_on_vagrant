@@ -147,7 +147,7 @@ It also create databases and tables for apel parser.
 
 This ansible code has some bug to handle the databases.
 
-So, DO NOT RUN TWICE after services. It will clear all records at the table.
+So, **DO NOT RUN TWICE THIS**. It will clear all records at the table.
 
 
 
