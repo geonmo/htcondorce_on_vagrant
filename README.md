@@ -145,7 +145,11 @@ It installs "apel" packages to condor-ce and apel client server.
 
 It also create databases and tables for apel parser.
 
-This ansible code did not have 
+This ansible code has some bug to handle the databases.
+
+So, DO NOT RUN TWICE after services. It will clear all records at the table.
+
+
 
 
 
