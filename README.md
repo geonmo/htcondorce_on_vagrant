@@ -110,7 +110,7 @@ grid_dummy_ca:
    cn: /C=KR/O=KISTI/O=GSDC/O=Dummy CA/CN=
 grid_host_certificate: {}
 ```
-In this case, dummy host certificate is configured to be used, but in practice, vars should be changed to install a public certificate.
+In this case, dummy host certificate is configured to be used, but in practice, **vars** should be changed to install a public certificate. For example, you need to change grid_dummy_host_certificate to false if you want to use host certs which is acquired by GRID CA. If you want to test by changing the certificate information of the dummy host certificate, you must also change the hash value. I didn't know how to calculate the hash value, so I got the hash value from htcondor-ce's MasterLog message and use it.
 
-If you want to test by changing the certificate information of the dummy host certificate, you must also change the hash value. I didn't know how to calculate the hash value, so I got the hash value from htcondor-ce's MasterLog message and entered it.
 
+### 05_
