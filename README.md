@@ -143,7 +143,7 @@ Please, type "ansible-playbook 08_apel.yml" to run it.
 
 It installs "apel" packages to condor-ce and apel client server.
 
-It also create databases and tables for apel parser.
+It also creates a database and tables for apel parser.
 
 This ansible code has some bug to handle the databases.
 
