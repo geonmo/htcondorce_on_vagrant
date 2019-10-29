@@ -113,4 +113,56 @@ grid_host_certificate: {}
 In this case, dummy host certificate is configured to be used, but in practice, **vars** should be changed to install a public certificate. For example, you need to change grid_dummy_host_certificate to false if you want to use host certs which is acquired by GRID CA. If you want to test by changing the certificate information of the dummy host certificate, you must also change the hash value. I didn't know how to calculate the hash value, so I got the hash value from htcondor-ce's MasterLog message and use it.
 
 
-### 05_
+### 05_htcondor-ce.yml
+Please, type "ansible-playbook 05_htcondor-ce.yml" to run it.
+
+It uses **hephyvienna.htcondor_ce** role to install htcondor-ce for htcondor-ce server.
+The argus server is set. However, it will skip due to condor_mapfile.
+For this toturial, argus setup is ignored and all GSI certs are passed to run on condor-ce after 07.custom step.
+
+htcondor-ce-bdii paackages is installed. However, I can not sure that it correctly works.
+At leaset, it provdes **GLUE2** information for site-BDII. However, I did not like that.
+
+On our CMS Tier-2(KR-KISTI-GSDC-02 / T2_KR_KISTI), I used previous version of bdii providers from OSG htcondor-ce project.
+
+### 06_htcondor.yml
+Please, type "ansible-playbook 06_htcondor.yml" to run it.
+
+It installs normal HTCondor server to LRMS and WNs.
+Nothing to special for this ansible code.
+
+### 07_custom.yml
+Please, type "ansible-playbook 07_custom.yml" to run it.
+
+It solves minor problems from vagrant.
+
+First, it changes /etc/hosts file to remove wrong localhost IP. Then, it adds "BIND_ALL_INTERFACES" and "NETWORK_INTERFACE" to htcondor and htcondor-ce configuration. At last, it changed /etc/condor-ce/condor_mapfile to allow all GSI certs for testing.
+
+### 08_apel.yml
+Please, type "ansible-playbook 08_apel.yml" to run it.
+
+It installs "apel" packages to condor-ce and apel client server.
+
+It also create databases and tables for apel parser.
+
+This ansible code did not have 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
