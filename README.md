@@ -1,4 +1,4 @@
-# Install HTCondor-CE on vagrant system
+# HTCondor-CE installation on vagrant system
 These codes are written based on the code to explain how to install HTCondor-CE in UMD middleware environment.
 
 You can run the code sequentially to see how HTCondor-CE is working and what packages you need.
