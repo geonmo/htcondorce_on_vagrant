@@ -4,7 +4,7 @@ These codes are written based on the code to explain how to install HTCondor-CE 
 You can run the code sequentially to see how HTCondor-CE is working and what packages you need.
 
 ## System environment
-This lab requires at least 4 cores of CPU and 4 GB of RAM or higher. If you can test with equipment below this, but there is no guarantee that it will work properly.
+This lab requires at least 4 cores of CPU and 4 GB of RAM or higher. If you can test with various equipments, but there is no guarantee that it will work properly.
 
 At the time of development, the test equipment was:
    * CPU: Intel Core i7-7700 CPU @ 3.6 GHz
