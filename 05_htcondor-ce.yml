@@ -3,7 +3,7 @@
   vars_files:
     - vars/main.yml
   roles:
-    - role: hephyvienna.htcondor_ce
+    - role: geonmo.htcondor_ce
       htcondor_ce_batch_system: condor
       htcondor_ce_argus_server: node3.intranet.local
       htcondor_ce_uid_domain: "{{ ansible_domain }}"
