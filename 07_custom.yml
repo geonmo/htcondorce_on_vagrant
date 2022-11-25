@@ -40,18 +40,6 @@
       with_items:
         - "{{ ipinfo }}"
       notify: restart_condorce
-    - lineinfile:
-        path: /etc/condor-ce/condor_mapfile
-        insertbefore: 'GSI (.*) GSS_ASSIST_GRIDMAP'
-        line: 'GSI "/C=KR/O=KISTI/O=GSDC/O=Dummy CA/CN=host/node0.intranet.local" node0.intranet.local'
-    - lineinfile:
-        path: /etc/condor-ce/condor_mapfile
-        insertbefore: 'GSI (.*) GSS_ASSIST_GRIDMAP'
-        line: 'GSI "(/CN=[-.A-Za-z0-9/= ]+)" cmspil01'
-    - replace:
-        path: /etc/condor-ce/config.d/02-ce-condor.conf
-        regexp: 'JOB_ROUTER_SCHEDD2_POOL=(.*):9618'
-        replace: 'JOB_ROUTER_SCHEDD2_POOL={{ LRMS }}:9618'
   handlers: 
     - name: restart_condorce
       service: 
