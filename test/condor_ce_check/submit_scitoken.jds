@@ -1,0 +1,28 @@
+# Required for local HTCondor-CE submission
+universe = grid
+grid_resource = condor node0.intranet.local node0.intranet.local:9619
+use_scitokens = true
+scitokens_file = /home/geonmo/.condor/tokens.d/geonmo
+#+Owner = undefined
+
+# Files
+executable = ce_test.sh
+output = ce_test_$(Process).out
+error = ce_test_$(Process).err
+log = ce_test_$(Process).log
+
+# File transfer behavior
+ShouldTransferFiles = YES
+WhenToTransferOutput = ON_EXIT
+
+# Optional resource requests
++xcount = 1            
+# Request 4 cores
++maxMemory = 100      
+# Request 4GB of RAM
+#+maxWallTime = 120     # Request 2 hrs of wall clock time
+#+remote_queue = "osg"  # Request the OSG queue
+
+# Run job once
+queue 5
+
