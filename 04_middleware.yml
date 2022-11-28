@@ -5,8 +5,3 @@
   roles:
     - role: geonmo.grid
       grid_middleware: "OSG"
-      #- role: geonmo.ansible_poolaccounts
-  tasks:
-    - template:
-        src: templates/dummy.signing_policy.j2
-        dest: "/etc/grid-security/certificates/{{ grid_dummy_ca.hash }}.signing_policy"
