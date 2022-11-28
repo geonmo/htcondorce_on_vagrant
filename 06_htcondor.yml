@@ -1,17 +1,5 @@
-- name: Setup local condor(LRMS) collector
-  hosts: lrms
-  vars_files:
-    - vars/main.yml
-  roles:
-    - role: geonmo.ansible_htcondor
-      condor_admin: "admin@node0.intranet.local"
-      condor_daemon_list: "MASTER, COLLECTOR, NEGOTIATOR"
-      condor_domain: "intranet.local"
-      condor_host: "node1.intranet.local"
-      condor_name: "HTCondor Cluster"
-
 - name: Setup local condor WN
-  hosts: condor_wn
+  hosts: condor_wn,lrms
   vars_files:
     - vars/main.yml
   roles:
@@ -19,6 +7,11 @@
       condor_admin: "admin@node0.intranet.local"
       condor_daemon_list: "MASTER, STARTD"
       condor_domain: "intranet.local"
-      condor_host: "node1.intranet.local"
+      condor_host: "node0.intranet.local"
       condor_name: "HTCondor Cluster"
       enable_dynamicslot: true
+  tasks:
+    - package:
+        name: apptainer
+        state: latest
+

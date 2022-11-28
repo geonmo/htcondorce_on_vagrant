@@ -1,17 +1,21 @@
-- name: Install htcondor-ce package
+- name: Install and configure htcondor-ce and LRMS collector 
   hosts: condor_ce
   vars_files:
     - vars/main.yml
   roles:
     - role: geonmo.htcondor_ce
+      grid_vos:
+       - cms
+       - ops
       htcondor_ce_batch_system: condor
       htcondor_ce_argus_server: node3.intranet.local
+      htcondor_ce_lrms_collector: "node0.intranet.local"
       htcondor_ce_uid_domain: "{{ ansible_domain }}"
     - role: geonmo.ansible_htcondor
       condor_admin: "admin@node0.intranet.local"
-      condor_daemon_list: "MASTER, SCHEDD"
+      condor_daemon_list: "MASTER, NEGOTIATOR, COLLECTOR, SCHEDD"
       condor_domain: "intranet.local"
-      condor_host: "node1.intranet.local"
+      condor_host: "node0.intranet.local"
       condor_name: "HTCondor Cluster"
   tasks:
     - template:
