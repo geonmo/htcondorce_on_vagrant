@@ -4,6 +4,7 @@
     - vars/main.yml
   roles:
     - role: geonmo.grid
+      grid_middleware: "OSG"
       #- role: geonmo.ansible_poolaccounts
   tasks:
     - template:
