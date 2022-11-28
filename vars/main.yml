@@ -1,17 +1,8 @@
 grid_vos:
   - cms
+  - ligo
   - ops
-grid_dummy_host_certificate: true
-grid_site_name: "KR-DUMMY-Tier3"
-grid_dummy_ca:
-  crt: dummy/CA.crt
-  key: dummy/CA.key
-  hash: 19d25ae9
-  cn: /C=KR/O=KISTI/O=GSDC/O=Dummy CA/CN=
 grid_host_certificate: {}
-ca_info:
-  cn: /C=KR/O=KISTI/O=GSDC/CN=Dummy CA
-  target: /C=KR/O=KISTI/O=GSDC/*
 grid_umd_repo_exclude:
   - dpm-*
   - lfc-*
