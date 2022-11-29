@@ -4,11 +4,13 @@
     - vars/main.yml ## grid_vos
   roles:
     - role: geonmo.htcondor_ce
+      condor_version: "9.0"
       htcondor_ce_batch_system: condor
       htcondor_ce_argus_server: node3.intranet.local
       htcondor_ce_lrms_collector: "node0.intranet.local"
       htcondor_ce_uid_domain: "{{ ansible_domain }}"
     - role: geonmo.ansible_htcondor
+      condor_version: "9.0"
       condor_admin: "admin@node0.intranet.local"
       condor_daemon_list: "MASTER, NEGOTIATOR, COLLECTOR, SCHEDD"
       condor_domain: "intranet.local"
