@@ -1,4 +1,4 @@
-- name: install grid and pool account setting
+- name: Install grid and pool account setting
   hosts: all
   vars_files:
     - vars/main.yml
@@ -6,7 +6,6 @@
     - role: geonmo.grid
       grid_middleware: "OSG"
       grid_dummy_host_certificate: true
-      grid_site_name: "KR-DUMMY-Tier3"
       grid_dummy_ca:
         crt: dummy/CA.crt
         key: dummy/CA.key
