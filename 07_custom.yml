@@ -30,7 +30,6 @@
   vars:
     ipinfo: 
       - { name: "node0", ip: "192.168.10.3"}
-    LRMS: "node1.intranet.local"
   tasks:
     - copy: 
         dest: /etc/condor-ce/config.d/03-private.conf 

@@ -11,7 +11,8 @@
       condor_name: "HTCondor Cluster"
       enable_dynamicslot: true
   tasks:
-    - package:
-        name: apptainer
+    - name: Install Apptainer packages
+      package:
+        name: ['apptainer','apptainer-suid']
         state: latest
 
