@@ -5,9 +5,9 @@
   tasks:
     - yum: 
         name: 
-          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-lib-1.8.2-1.el7.noarch.rpm'
-          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-parsers-1.8.2-1.el7.noarch.rpm'
-          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-client-1.8.2-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.9.1-1/apel-lib-1.9.1-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.9.1-1/apel-parsers-1.9.1-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.9.1-1/apel-client-1.9.1-1.el7.noarch.rpm'
         state: present
     - yum:
         name: htcondor-ce-apel
@@ -34,9 +34,10 @@
   tasks:
     - yum:
         name: 
-          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-lib-1.8.2-1.el7.noarch.rpm'
-          - 'https://github.com/apel/apel/releases/download/1.8.2-1/apel-client-1.8.2-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.9.1-1/apel-lib-1.9.1-1.el7.noarch.rpm'
+          - 'https://github.com/apel/apel/releases/download/1.9.1-1/apel-client-1.9.1-1.el7.noarch.rpm'
           - 'mariadb-server'
+          - 'https://github.com/apel/ssm/releases/download/3.2.1-1/apel-ssm-3.2.1-1.el7.noarch.rpm'
         state: present
     - service:
         name: mariadb
